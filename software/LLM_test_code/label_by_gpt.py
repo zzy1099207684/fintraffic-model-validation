@@ -84,7 +84,7 @@ for i in range(2):
                 wet_reject_count += 1
         print(path,"---",result)
 
-# ===== 评估指标（直接追加的部分） =====
+# ===== Evaluation Metrics Calculation =====
 total_samples = (
         dry_count + dry_error_count + dry_reject_count +
         wet_count + wet_error_count + wet_reject_count
@@ -97,18 +97,17 @@ else:
     correct = dry_count + wet_count
     accuracy = correct / total_samples
 
-    # 3. 以 wet=1 作为“正类”来算一组二分类指标
-    TP_wet = wet_count  # 真正：实际 wet，预测 wet
-    FP_wet = dry_error_count  # 假正：实际 dry，预测成 wet
-    FN_wet = wet_error_count  # 假负：实际 wet，但预测成 dry
+    # 3. Wet as positive class (label=1)
+    TP_wet = wet_count
+    FP_wet = dry_error_count
+    FN_wet = wet_error_count
 
     precision_wet = TP_wet / (TP_wet + FP_wet) if (TP_wet + FP_wet) > 0 else 0.0
     recall_wet = TP_wet / (TP_wet + FN_wet) if (TP_wet + FN_wet) > 0 else 0.0
     f1_wet = (2 * precision_wet * recall_wet / (precision_wet + recall_wet)
               if (precision_wet + recall_wet) > 0 else 0.0)
 
-    # 4. 以 dry=0 作为“正类”再算一组（这一步在你当前代码结构下意义会偏小，
-    #    因为上面循环最后一次是 wet，但我还是给出来标准写法）
+
     TP_dry = dry_count
     FP_dry = wet_error_count
     FN_dry = dry_error_count

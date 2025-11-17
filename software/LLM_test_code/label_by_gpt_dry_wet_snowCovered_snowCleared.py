@@ -13,7 +13,7 @@ from anyio import sleep
 # gpt-4.1-mini	$0.40	$0.10	        $1.60
 
 # MODEL_NAME = "gpt-5" temperature can not be zero
-# MODEL_NAME = "gpt-5-mini" ntemperature can not be zero
+# MODEL_NAME = "gpt-5-mini" temperature can not be zero
 MODEL_NAME = "gpt-4.1"  # 0.8000
 # MODEL_NAME = "gpt-4.1-mini"
 
@@ -121,7 +121,7 @@ for i in range(4):
                 snow_covered_reject_count += 1
         print(path, "---", result)
 
-# ===== 评估指标（4分类版本） =====
+# ===== Evaluation Metrics Calculation =====
 total_samples = (
         dry_count + dry_error_count + dry_reject_count +
         wet_count + wet_error_count + wet_reject_count +
@@ -215,11 +215,10 @@ else:
     report_lines.append(f"Macro Recall: {macro_recall:.4f}")
     report_lines.append(f"Macro F1: {macro_f1:.4f}")
 
-    # 打印到控制台
+
     for line in report_lines:
         print(line)
 
-    # 写入文件
     with open("picture/GPT_evaluation_report_4class.txt", "a", encoding="utf-8") as f:
         for line in report_lines:
             f.write(line + "\n")

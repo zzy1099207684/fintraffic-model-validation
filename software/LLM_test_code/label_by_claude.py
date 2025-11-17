@@ -12,7 +12,7 @@ MODEL_NAME = "claude-3-7-sonnet-20250219"
 
 client = anthropic.Anthropic(
     api_key=""
-    # 替换成你的 API key
+    # REPLACE_WITH YOUR_API_KEY
 )
 
 
